@@ -21,8 +21,8 @@ function message(text, isError = false) {
 function isAdmissionForm(urlString) {
   try {
     const url = new URL(urlString);
-    return url.protocol === 'https:' && url.hostname === SITE_HOST &&
-      /\/admission_form\.aspx$/i.test(url.pathname);
+    return url.origin === `https://${SITE_HOST}` &&
+      /^\/admission_form\.aspx$/i.test(url.pathname);
   } catch {
     return false;
   }

@@ -11,7 +11,7 @@
   const PENDING_MAX_AGE_MS = 90_000;
   const RETRY_DELAY_MS = 1200;
   const MAX_UPDATES_PER_DROPDOWN = 2;
-  const FORM_PATH = /\/admission_form\.aspx$/i;
+  const FORM_PATH = /^\/admission_form\.aspx$/i;
   const AUTO_GUARD_KEY = 'iismDocsAutoGuardV103';
   const AUTO_WINDOW_MS = 45_000;
   const MAX_AUTO_ATTEMPTS_PER_SLOT = 3;
@@ -58,7 +58,7 @@
   const norm = (value) => String(value ?? '').toLowerCase().normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '').replace(/&/g, 'and').replace(/[^a-z0-9]/g, '');
   const isFormPage = () => FORM_PATH.test(window.location.pathname) &&
-    window.location.hostname === 'admission.iismgulmarg.in';
+    window.location.origin === 'https://admission.iismgulmarg.in';
   let isBusy = false;
 
   function isWritable(el) {
@@ -356,6 +356,10 @@
     const used = new Set();
     for (const winner of winners) {
       if (used.has(winner.input)) continue;
+      // A single input must also have a clear winner across document types.
+      // Otherwise a mixed label/identifier could expose the wrong document.
+      const rivals = scored.filter((candidate) => candidate.input === winner.input && candidate.key !== winner.key);
+      if (rivals.some((candidate) => winner.score - candidate.score < 12)) continue;
       matched.set(winner.key, winner.input);
       used.add(winner.input);
     }
@@ -375,7 +379,7 @@
 
   async function transferSavedFile(key) {
     const prepared = await chrome.runtime.sendMessage({action: 'DOC_PREPARE', key});
-    if (!prepared?.ok) throw new Error(prepared?.error || 'Cannot decrypt document');
+    if (!prepared?.ok) throw new Error(prepared?.error || 'Cannot read saved document');
     try {
       const bytes = new Uint8Array(prepared.size);
       let offset = 0;
@@ -425,6 +429,10 @@
       if (!manual && attemptedInputs.has(input)) { skipped.push(key); continue; }
       try {
         const file = await transferSavedFile(key);
+        // Reading file chunks is asynchronous. A person or page script may
+        // have changed this control while the saved file was being read.
+        if (!input.isConnected || input.disabled || input.files?.length) { skipped.push(key); continue; }
+        if (matchUploadFields().get(key) !== input) { review.push(key); continue; }
         if (!siteAcceptsFile(input, file)) { review.push(`${key} (website file type restriction)`); continue; }
         if (!manual && !mayAutoAttempt(key)) { review.push(`${key} (automatic retry limit reached)`); continue; }
         const transfer = new DataTransfer();

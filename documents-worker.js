@@ -8,7 +8,7 @@ const pendingTransfers = new Map();
 function allowedPage(url) {
   try {
     const parsed = new URL(url);
-    return parsed.protocol === 'https:' && parsed.hostname === 'admission.iismgulmarg.in' &&
+    return parsed.origin === 'https://admission.iismgulmarg.in' &&
       /^\/admission_form\.aspx$/i.test(parsed.pathname);
   } catch { return false; }
 }

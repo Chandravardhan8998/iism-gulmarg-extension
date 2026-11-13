@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "IISM Gulmarg Admission Autofill",
   "description": "Save five local documents and auto-attach them to the IISM admission form; includes original text and DOB autofill.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "permissions": [
     "storage",
     "activeTab",

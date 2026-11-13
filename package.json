@@ -1,0 +1,16 @@
+{
+  "name": "iism-gulmarg-autofill",
+  "version": "1.0.4",
+  "private": true,
+  "description": "Local admission profile and document autofill for the IISM Gulmarg admission form",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "test": "npm run check && node --test",
+    "test:browser": "node scripts/browser-smoke.mjs",
+    "package": "npm test && python3 scripts/package.py"
+  }
+}

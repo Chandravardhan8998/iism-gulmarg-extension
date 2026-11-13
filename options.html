@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>IISM Autofill · Saved profile</title>
+</head>
+<body class="options-body">
+  <main class="options-shell">
+    <header class="options-header">
+      <div class="brandbar"><div class="brandmark">I</div><div><div class="eyebrow">IISM GULMARG</div><h1>Saved admission profile</h1></div></div>
+      <p>Enter your information here once, then click <strong>Fill admission form</strong> from the extension icon when your IISM form is open.</p>
+    </header>
+
+    <aside class="note"><strong>Private by design:</strong> Details are saved in this Chrome profile using local extension storage. This extension does not transmit them anywhere. Never use this on a shared computer. The institute's site may receive filled details during its normal form interactions (including dropdown refreshes) and on submission.</aside>
+
+    <section class="document-callout">
+      <div><strong>Automatic five-document autofill</strong><p>Save the two marksheets, candidate photo and signature, and parent signature. Files auto-attach when the admission form opens.</p></div>
+      <button type="button" class="secondary-button" id="openDocuments">Manage documents</button>
+    </section>
+
+    <form id="profileForm" novalidate>
+      <div id="formSections"></div>
+      <div class="form-actions">
+        <button type="submit" class="primary-button" id="saveButton">Save profile</button>
+        <button type="button" class="danger-button" id="clearButton">Clear saved profile</button>
+        <span id="saveStatus" aria-live="polite"></span>
+      </div>
+    </form>
+
+    <p class="bottom-note">Course dropdowns depend on the institute's available choices. Enter the exact visible option name when possible. Leave fields blank if you prefer to complete them manually. DOB uses your browser's date picker. Save the five files in <strong>Manage documents</strong> once; they auto-attach when you open the IISM form. Review files, CAPTCHA, declarations and the final submission manually on the website.</p>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>

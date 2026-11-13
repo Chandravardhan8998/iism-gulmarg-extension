@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>IISM Autofill · Five saved documents</title>
+</head>
+<body class="options-body">
+  <main class="options-shell document-shell">
+    <header class="options-header">
+      <div class="brandbar"><div class="brandmark">I</div><div><div class="eyebrow">IISM GULMARG · VERSION 1.0.3</div><h1>Automatic document uploads</h1></div></div>
+      <p>Choose your five files once. When you visit the IISM admission form, the extension automatically attempts to attach them to the matching fields — no passphrase or additional clicks.</p>
+    </header>
+    <aside class="note"><strong>Open local storage:</strong> Files are saved without a password or encryption in this Chrome profile. Anyone with access to this browser profile or computer may be able to access them. Nothing is sent to our servers. The official admission website may receive attached files during its own upload interactions. Always verify the selected files before you submit the form.</aside>
+    <section class="form-section" aria-labelledby="documentHeading">
+      <div class="section-heading"><h2 id="documentHeading">Your five documents</h2><p id="documentCount" aria-live="polite">Loading saved files…</p></div>
+      <div id="documentList" class="document-list"></div>
+      <p id="documentFeedback" role="status" aria-live="polite" class="feedback"></p>
+      <p class="bottom-note">File types: marksheets PDF, JPG, PNG, DOC, DOCX (up to 10 MB stored); photos/signatures JPG or PNG (up to 500 KB stored). The IISM website may have stricter upload requirements. Unknown or ambiguous file fields are never guessed.</p>
+    </section>
+    <dialog id="previewDialog" class="document-preview-dialog" aria-labelledby="previewTitle">
+      <div class="preview-bar"><h2 id="previewTitle">Document preview</h2><button type="button" id="closePreview" class="secondary-button">Close preview</button></div>
+      <div id="previewBody" class="preview-body"></div>
+    </dialog>
+    <section class="form-section danger-section">
+      <h2>Remove saved documents</h2>
+      <p class="bottom-note">Removing a saved file does not affect the text profile. Older encrypted files from v1.0.2 are not used in this version and require reselecting; you can clear that old storage separately.</p>
+      <div class="form-actions">
+        <button type="button" id="resetDocuments" class="danger-button">Delete these five saved files</button>
+        <button type="button" id="deleteLegacy" class="secondary-button">Clear old v1.0.2 document storage</button>
+      </div>
+    </section>
+  </main>
+  <script src="document-store.js"></script>
+  <script src="documents.js"></script>
+</body>
+</html>

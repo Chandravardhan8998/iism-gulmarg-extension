@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "IISM Gulmarg Admission Autofill",
+  "description": "Save five local documents and auto-attach them to the IISM admission form; includes original text and DOB autofill.",
+  "version": "1.0.3",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://admission.iismgulmarg.in/*"
+  ],
+  "action": {
+    "default_title": "IISM Admission Autofill",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://admission.iismgulmarg.in/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "service_worker": "documents-worker.js"
+  }
+}

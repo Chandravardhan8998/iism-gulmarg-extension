@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>IISM Autofill</title>
+</head>
+<body class="popup-body">
+  <main class="popup-shell">
+    <header class="brandbar">
+      <div class="brandmark">I</div>
+      <div><div class="eyebrow">CHROME EXTENSION</div><h1>IISM Autofill</h1></div>
+    </header>
+
+    <section class="status-card">
+      <div class="status-line"><span class="status-dot" id="statusDot"></span><span id="siteStatus">Checking the open tab…</span></div>
+      <p id="savedStatus">Reading saved profile…</p>
+    </section>
+
+    <button id="fillButton" class="primary-button" type="button" disabled>
+      <span class="button-icon">↗</span> Fill admission form
+    </button>
+    <button id="editButton" class="secondary-button" type="button">Edit saved profile</button>
+    <button id="documentsButton" class="secondary-button" type="button">Manage five saved documents</button>
+    <button id="attachButton" class="secondary-button" type="button" disabled>Attach saved documents only</button>
+    <p class="document-popup-status" id="documentsStatus" aria-live="polite">Checking saved documents…</p>
+    <button id="diagnosticButton" class="text-button" type="button" disabled>Copy detected form fields</button>
+    <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+
+    <footer class="smallprint">No password · Saved locally · Automatic document attachment · Manual final submission</footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
